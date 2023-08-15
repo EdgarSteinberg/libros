@@ -111,7 +111,7 @@ function cargarProductosCarrito(array) {
                 let cardProducto = document.getElementById(`productoCarrito${productoCarrito.id}`)
                 cardProducto.remove()
                 productosEnCarrito.splice(indice, 1)
-                localStorage.setItem("carrito", JSO.stringify(productosEnCarrito))
+                localStorage.setItem("carrito", JSON.stringify(productosEnCarrito))
 
             })
     });
