@@ -1,0 +1,44 @@
+[
+    {
+        "id": 1,
+        "autor": "Jorge Luis Borges",
+        "titulo": "Aleph",
+        "precio": 900,
+        "imagen": "AlephBorges.jpg"
+    },
+    {
+        "id": 2,
+        "autor": "Gabriel Garcia Marque",
+        "titulo": "Cien años de Soledad",
+        "precio": 4500,
+        "imagen": "CienSoledadMarquez.jpg"
+    },
+    {
+        "id": 3,
+        "autor": "Isabel Allende",
+        "titulo": "Paula",
+        "precio": 2800,
+        "imagen": "PaulaAllende.jpg"
+    },
+    {
+        "id": 4,
+        "autor": "Jorge Luis Borges",
+        "titulo": "Ficciones",
+        "precio": 1400,
+        "imagen": "FiccionesBorges.jpg"
+    },
+    {
+        "id": 5,
+        "autor": "Mario Benedetti",
+        "titulo": "Andamios",
+        "precio": 2200,
+        "imagen": "AndamiosBenedetti.jpg"
+    },
+    {
+        "id": 6,
+        "autor": "Mario Vargas Llosa",
+        "titulo": "La Ciudad y los perros",
+        "precio": 2000,
+        "imagen": "CiudadPerrosVargasLlosa.jpg"
+    }
+]
