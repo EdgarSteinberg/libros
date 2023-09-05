@@ -1,4 +1,4 @@
-/* class Libro {
+ class Libro {
     constructor(id, autor,titulo,precio,imagen) {
         this.id = id,
         this.autor = autor,
@@ -20,10 +20,10 @@ const libro6 = new Libro (6, "Mario Vargas Llosa", "La ciudad y los perros", 200
 
 let estanteria = []
 
-if(localStorage.getItem("Estanteria")){
+if(localStorage.getItem("estanteria")){
     estanteria = JSON.parse(localStorage.getItem("estanteria"))
 
 }else{
     estanteria.push(libro1, libro2, libro3, libro4, libro5, libro6)
     localStorage.setItem("estanteria", JSON.stringify(estanteria))
-} */
+} 

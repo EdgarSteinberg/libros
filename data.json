@@ -1,4 +1,5 @@
-[
+
+ [
     {
         "id": 1,
         "autor": "Jorge Luis Borges",
@@ -8,7 +9,7 @@
     },
     {
         "id": 2,
-        "autor": "Gabriel Garcia Marque",
+        "autor": "Gabriel Garcia Marquez",
         "titulo": "Cien años de Soledad",
         "precio": 4500,
         "imagen": "CienSoledadMarquez.jpg"

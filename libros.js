@@ -7,9 +7,9 @@ if (localStorage.getItem("carrito")) {
     localStorage.setItem("carrito", JSON.stringify(productosEnCarrito))
 }
 
-function getBooks () {
+/* function getBooks () {
     return fetch("./data.json").then(response => response.json())
-}
+} */
 
 function buscarInfo(buscado, array) {
     let busqueda = array.filter(
@@ -31,7 +31,7 @@ function buscarInfo(buscado, array) {
 function ordenarMayorMenor(array) {
     let mayorMenor = [].concat(array)
     mayorMenor.sort((a, b) => (b.precio - a.precio))
-    mostrarCatalogo(mayorMenor)
+    mostrarCatalogo(mayorMenor) 
 }
 
 function ordenarMenorMayor(array) {
@@ -43,7 +43,7 @@ function ordenarMenorMayor(array) {
 function ordernarAlfabeticamente(array) {
     let alfabeticamente = [].concat(array)
     alfabeticamente.sort((a, b) => {
-        if (a.titulos < b.titulo) return -1
+        if (a.titulo < b.titulo) return -1
         if (a.titulo > b.titulo) return 1
         return 0;
     })
@@ -76,7 +76,7 @@ function mostrarCatalogo(array) {
              <p class="">Precio: $${libro.precio}</p>
         <button id="agregarBtn${libro.id}" class="btn btn-outline-success">Agregar al carrito</button>
         </div>     
-</div>`
+        </div>`
         divProductos.appendChild(nuevoLibro)
         let btnAgregar = document.getElementById(`agregarBtn${libro.id}`)
 
@@ -155,10 +155,15 @@ selectOrden.addEventListener("change", () => {
         ordernarAlfabeticamente(estanteria)
     }
      else {
-        mostrarCatalogo(estanteria)
+         mostrarCatalogo(estanteria) }
+      /*    {
+        getBooks().then(books => mostrarCatalogo(books));
     }
+    } */
 })
-getBooks().then(books =>{
+/* getBooks().then(books =>{
     mostrarCatalogo(books) 
 
 })
+ */
+  mostrarCatalogo(estanteria) 
