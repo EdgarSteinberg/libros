@@ -6,7 +6,7 @@
         this.precio = precio,
         this.imagen = imagen
     }
-    mostarData() {
+    mostrarData() {
         console.log(`El titulos es ${this.titulo}, el autor es ${this.autor} y su precio es ${this.precio}`)
     }
 }

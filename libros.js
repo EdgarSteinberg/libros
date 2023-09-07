@@ -1,3 +1,5 @@
+
+
 let productosEnCarrito = []
 
 if (localStorage.getItem("carrito")) {
@@ -7,7 +9,9 @@ if (localStorage.getItem("carrito")) {
     localStorage.setItem("carrito", JSON.stringify(productosEnCarrito))
 }
 
-
+function getBooks () {
+    return fetch ("./data.json").then(response => response.json())
+}
 
 function buscarInfo(buscado, array) {
     let busqueda = array.filter(
@@ -62,7 +66,7 @@ let selectOrden = document.getElementById("selectOrden")
 
 function mostrarCatalogo(array) {
     divProductos.innerHTML = ""
-
+    estanteria = array
     for (const libro of array) {
         let nuevoLibro = document.createElement("div")
         nuevoLibro.classList.add("col-12", "col-md-6", "col-lg-4", "my-4")
@@ -114,13 +118,26 @@ function cargarProductosCarrito(array) {
             })
     });
 }
-
+class Libro {
+    constructor(id, autor,titulo,precio,imagen) {
+        this.id = id,
+        this.autor = autor,
+        this.titulo = titulo,
+        this.precio = precio,
+        this.imagen = imagen
+    }
+    mostrarData() {
+        console.log(`El titulos es ${this.titulo}, el autor es ${this.autor} y su precio es ${this.precio}`)
+    }
+}
+ 
 function cargarLibro(array) {
     let inputAutor = document.getElementById("autorInput")
     let inputTitulo = document.getElementById("tituloInput")
     let inputPrecio = document.getElementById("precioInput")
 
     let libroCreado = new Libro(array.length + 1, inputAutor.value, inputTitulo.value, parseInt(inputPrecio.value), "libroNuevo.jpg")
+    libroCreado.mostrarData()
     array.push(libroCreado)
     localStorage.setItem("estanteria", JSON.stringify(array))
     mostrarCatalogo(array)
@@ -157,4 +174,7 @@ selectOrden.addEventListener("change", () => {
      
 })
 
-  mostrarCatalogo(estanteria) 
+ getBooks().then(books => {
+    mostrarCatalogo(books)
+ })
+
