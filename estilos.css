@@ -3,15 +3,14 @@
     border: 0;
     box-sizing: border-box;
 }
-/* body{
-    color: black;
-    background-color: antiquewhite;
+ body{
+    
+    background-color: rgb(241, 205, 157);
 }
-.darkMode{
-    color: antiquewhite;
-    background-color: black;
-} */
+
 
 .dark-theme{
     background-color: black;
+    
 }
+

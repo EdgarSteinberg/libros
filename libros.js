@@ -7,9 +7,7 @@ if (localStorage.getItem("carrito")) {
     localStorage.setItem("carrito", JSON.stringify(productosEnCarrito))
 }
 
-/* function getBooks () {
-    return fetch("./data.json").then(response => response.json())
-} */
+
 
 function buscarInfo(buscado, array) {
     let busqueda = array.filter(
@@ -156,14 +154,7 @@ selectOrden.addEventListener("change", () => {
     }
      else {
          mostrarCatalogo(estanteria) }
-      /*    {
-        getBooks().then(books => mostrarCatalogo(books));
-    }
-    } */
+     
 })
-/* getBooks().then(books =>{
-    mostrarCatalogo(books) 
 
-})
- */
   mostrarCatalogo(estanteria) 
