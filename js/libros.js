@@ -1,16 +1,32 @@
-
-
-let productosEnCarrito = []
+let productosEnCarrito = [];
 
 if (localStorage.getItem("carrito")) {
-    productosEnCarrito = JSON.parse(localStorage.getItem("carrito"))
+    productosEnCarrito = JSON.parse(localStorage.getItem("carrito"));
 
 } else {
-    localStorage.setItem("carrito", JSON.stringify(productosEnCarrito))
+    localStorage.setItem("carrito", JSON.stringify(productosEnCarrito));
 }
 
-function getBooks () {
-    return fetch ("./data.json").then(response => response.json())
+let divProductos = document.getElementById("productos")
+let btnGuardarLibro = document.getElementById("guardarLibroBtn")
+let buscador = document.getElementById("buscador")
+let btnVerCatalogo = document.getElementById("verCatalogo")
+let btnOcultarCatalogo = document.getElementById("ocultarCatalogo")
+let modalBody = document.getElementById("modal-body")
+let botonCarrito = document.getElementById("botonCarrito")
+let coincidencia = document.getElementById("coincidencia")
+let selectOrden = document.getElementById("selectOrden")
+
+
+async function getBooks() {
+    try {
+        const response = await fetch('../data.json');
+        const json = await response.json();
+        mostrarCatalogo(json);
+        estanteria = json; // Guardamos los libros en la estantería
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 function buscarInfo(buscado, array) {
@@ -33,7 +49,7 @@ function buscarInfo(buscado, array) {
 function ordenarMayorMenor(array) {
     let mayorMenor = [].concat(array)
     mayorMenor.sort((a, b) => (b.precio - a.precio))
-    mostrarCatalogo(mayorMenor) 
+    mostrarCatalogo(mayorMenor)
 }
 
 function ordenarMenorMayor(array) {
@@ -52,17 +68,6 @@ function ordernarAlfabeticamente(array) {
     mostrarCatalogo(alfabeticamente)
 }
 
-let divProductos = document.getElementById("productos")
-let btnGuardarLibro = document.getElementById("guardarLibroBtn")
-let buscador = document.getElementById("buscador")
-let btnVerCatalogo = document.getElementById("verCatalogo")
-let btnOcultarCatalogo = document.getElementById("ocultarCatalogo")
-let modalBody = document.getElementById("modal-body")
-let botonCarrito = document.getElementById("botonCarrito")
-let coincidencia = document.getElementById("coincidencia")
-let selectOrden = document.getElementById("selectOrden")
-
-
 
 function mostrarCatalogo(array) {
     divProductos.innerHTML = ""
@@ -71,12 +76,12 @@ function mostrarCatalogo(array) {
         let nuevoLibro = document.createElement("div")
         nuevoLibro.classList.add("col-12", "col-md-6", "col-lg-4", "my-4")
         nuevoLibro.innerHTML = `<div id="${libro.id}" class="card style="width:18rem;">
-        <img class="card-img-top img-fluid" style="height: 200px;"src="assets/${libro.imagen}" alt="${libro.titulo} de ${libro.autor}">
+        <img class="card-img-top img-fluid" style="width: 100%; height: 200px; object-fit: corver;"src="assets/${libro.imagen}" alt="${libro.titulo} de ${libro.autor}">
         <div class="card-body">
              <h4 class="card-title">${libro.titulo}</h4>
-             <p>Autor: ${libro.autor}</p>
-             <p class="">Precio: $${libro.precio}</p>
-        <button id="agregarBtn${libro.id}" class="btn btn-outline-success">Agregar al carrito</button>
+             <p class="card-p">Autor: ${libro.autor}</p>
+             <p class="card-p">Precio: $${libro.precio}</p>
+        <button id="agregarBtn${libro.id}" class="btn btn-success" style="width:100%">Agregar al carrito</button>
         </div>     
         </div>`
         divProductos.appendChild(nuevoLibro)
@@ -84,6 +89,7 @@ function mostrarCatalogo(array) {
 
         btnAgregar.addEventListener("click", () => {
             agregarAlCarrito(libro)
+            Swal.fire("Has agregado este producto al carrito!");
         })
     }
 }
@@ -97,40 +103,33 @@ function cargarProductosCarrito(array) {
     modalBody.innerHTML = ""
 
     array.forEach(productoCarrito => {
-        modalBody.innerHTML += `<div class="card border-primary mb-3" id="productoCarrito${productoCarrito.id}" style="max-width: 540px;">
-        <img class="card-img-top" heigth="300px" src="assets/${productoCarrito.imagen}" alt="${productoCarrito.titulo}">
-        <div class="card-body">
-                <h4 class"card-title">${productoCarrito.titulo}</h4>
-                <p class="card-text"> $${productoCarrito.precio}</p>
-                <button class= "btn btn-danger" id="botonEliminar${productoCarrito.id}"><i class="fas fa-trash-alt"></i></button>
+        modalBody.innerHTML += `
+        <div class="card border-primary mb-3" id="productoCarrito${productoCarrito.id}" style="max-width: 300px;">
+            <img class="card-img-top" style="min-width:290px ;max-height: 250px; " src="assets/${productoCarrito.imagen}" alt="${productoCarrito.titulo}">
+                <div class="card-body" > 
+                <h4 class="card-title">${productoCarrito.titulo}</h4>
+                <p class="card-text" style="text-align: center" ;> $${productoCarrito.precio}</p>
+                <button class="btn btn-danger" style="text-align: center; width: 100%" id="botonEliminar${productoCarrito.id}">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+            </div>
         </div>
-    </div>            
-        `
+        `;
     });
+
 
     array.forEach((productoCarrito, indice) => {
         document.getElementById(`botonEliminar${productoCarrito.id}`).addEventListener("click", () => {
-                let cardProducto = document.getElementById(`productoCarrito${productoCarrito.id}`)
-                cardProducto.remove()
-                productosEnCarrito.splice(indice, 1)
-                localStorage.setItem("carrito", JSON.stringify(productosEnCarrito))
+            let cardProducto = document.getElementById(`productoCarrito${productoCarrito.id}`)
+            cardProducto.remove()
+            productosEnCarrito.splice(indice, 1)
+            localStorage.setItem("carrito", JSON.stringify(productosEnCarrito))
 
-            })
+        })
     });
 }
-class Libro {
-    constructor(id, autor,titulo,precio,imagen) {
-        this.id = id,
-        this.autor = autor,
-        this.titulo = titulo,
-        this.precio = precio,
-        this.imagen = imagen
-    }
-    mostrarData() {
-        console.log(`El titulos es ${this.titulo}, el autor es ${this.autor} y su precio es ${this.precio}`)
-    }
-}
- 
+
+
 function cargarLibro(array) {
     let inputAutor = document.getElementById("autorInput")
     let inputTitulo = document.getElementById("tituloInput")
@@ -163,18 +162,20 @@ selectOrden.addEventListener("change", () => {
     if (selectOrden.value == 1) {
         ordenarMayorMenor(estanteria)
     }
-     else if (selectOrden.value == 2) {
+    else if (selectOrden.value == 2) {
         ordenarMenorMayor(estanteria)
     }
-     else if (selectOrden.value == 3) {
+    else if (selectOrden.value == 3) {
         ordernarAlfabeticamente(estanteria)
     }
-     else {
-         mostrarCatalogo(estanteria) }
-     
+    else {
+        mostrarCatalogo(estanteria)
+    }
+
 })
 
- getBooks().then(books => {
-    mostrarCatalogo(books)
- })
+//  getBooks().then(books => {
+//     mostrarCatalogo(books)
+//  })
 
+getBooks();

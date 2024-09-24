@@ -1,0 +1,76 @@
+* {
+    margin: 0;
+    border: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(241, 205, 157);
+}
+
+li {
+    list-style: none;
+}
+
+h1 {
+    font-size: 33px;
+}
+
+h4, h5 {
+    text-align: center;
+    color: black;
+}
+
+h5 {
+    font-size: inherit; /* Usa la misma fuente de su contenedor */
+}
+
+hr {
+    width: 100%;
+}
+
+/* Tema oscuro */
+.dark-theme {
+    background-color: black;
+    color: white;
+}
+
+/* Estilos de formularios */
+.formContainer {
+    margin: 0 auto;
+    width: 80%;
+}
+
+.form-label {
+    font-weight: bolder;
+}
+
+/* Botones */
+.btn-success {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Tarjetas */
+.card-title, .card-text, .card-p, h5 {
+    color: black;
+}
+
+.card-img-top {
+    width: 100%;
+    min-height: 10%;
+}
+
+/* Media Queries */
+@media screen and (max-width: 1000px) {
+    h1 {
+        font-size: 30px;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    h1 {
+        font-size: 20px;
+    }
+}
